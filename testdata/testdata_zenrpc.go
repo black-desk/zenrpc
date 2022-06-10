@@ -114,7 +114,16 @@ func (ArithService) SMD() smd.ServiceInfo {
 									Description: `coordinate`,
 									Type:        smd.Integer,
 								},
+								"ConnectedObject": {
+									Description: ``,
+									Ref:         "#/definitions/objects.AbstractObject",
+									Type:        smd.Object,
+								},
 							},
+						},
+						"objects.AbstractObject": {
+							Type:       "object",
+							Properties: map[string]smd.Property{},
 						},
 					},
 				},
@@ -136,6 +145,17 @@ func (ArithService) SMD() smd.ServiceInfo {
 								Description: `coordinate`,
 								Type:        smd.Integer,
 							},
+							"ConnectedObject": {
+								Description: ``,
+								Ref:         "#/definitions/objects.AbstractObject",
+								Type:        smd.Object,
+							},
+						},
+						Definitions: map[string]smd.Definition{
+							"objects.AbstractObject": {
+								Type:       "object",
+								Properties: map[string]smd.Property{},
+							},
 						},
 					},
 				},
@@ -151,6 +171,17 @@ func (ArithService) SMD() smd.ServiceInfo {
 						"Y": {
 							Description: `coordinate`,
 							Type:        smd.Integer,
+						},
+						"ConnectedObject": {
+							Description: ``,
+							Ref:         "#/definitions/objects.AbstractObject",
+							Type:        smd.Object,
+						},
+					},
+					Definitions: map[string]smd.Definition{
+						"objects.AbstractObject": {
+							Type:       "object",
+							Properties: map[string]smd.Property{},
 						},
 					},
 				},
