@@ -50,7 +50,7 @@ type Service struct {
 type Method struct {
 	FuncDecl      *ast.FuncType
 	Name          string
-	LowerCaseName string
+	JsonName      string
 	HasContext    bool
 	Args          []Arg
 	DefaultValues map[string]DefaultValue
@@ -244,7 +244,7 @@ func (pi *PackageInfo) parseMethods(f *ast.File) error {
 		m := Method{
 			FuncDecl:      fdecl.Type,
 			Name:          fdecl.Name.Name,
-			LowerCaseName: strings.ToLower(fdecl.Name.Name),
+			JsonName:      strings.ToLower(fdecl.Name.Name),
 			Args:          []Arg{},
 			DefaultValues: make(map[string]DefaultValue),
 			Returns:       []Return{},
@@ -573,6 +573,10 @@ func (m *Method) parseComments(doc *ast.CommentGroup, pi *PackageInfo) {
 			// example: "//zenrpc:-32603		divide by zero"
 
 			m.Errors = append(m.Errors, SMDError{i, couple[1]})
+		} else if couple[0] == "name:" {
+			// json name of method
+			// example: "//zenrpc:name: workspace/executeCommand"
+			m.JsonName = couple[1]
 		} else {
 			// description for argument without default value
 			// example: "//zenrpc:id person id"
